@@ -61,7 +61,7 @@
 
 抽象数据类型的标准格式
 
-```
+```c
 ADT 抽象数据类型名
 Data
 	数据元素之间逻辑关系的定义
@@ -234,7 +234,7 @@ for(i=0; i<n; i++) {
 
 ## 线性表的抽象数据类型
 
-```
+```c
  ADT 线性表(List)
  Data
      线性表的数据对象集合为{a1,a2,...,an}, 每个元素的类型均为 DataType。
@@ -703,8 +703,11 @@ int StaticLinkListLength(StaticLinkList space) {
 
 
 ## 栈 stack
-  栈--是限定仅在表尾进行插入和删除操作的线性表
 
+  栈--是限定仅在表尾进行插入和删除操作的线性表
+  
+  人生，就像一个很大的栈演变。出生时赤条条地来到这个世界，慢慢地长大，渐渐地变老，最终还得赤条条地离开世间。
+  
 后进先出  LIFO结构(Last In First Out) 弹夹  网页后退功能
 
 栈顶--允许插入和删除的那一端
@@ -712,7 +715,7 @@ int StaticLinkListLength(StaticLinkList space) {
 重要--进栈出栈变化形式--不是等所有元素进栈后再出栈---可以先进栈的元素直接出栈--后面的元素再进栈出栈
 
 抽象数据类型
-```
+```c
 ADT 栈(stack)
 Data
     同线性表,元素具有相同的类型,相邻元素具有前驱和后继关系
@@ -773,9 +776,42 @@ typedef struct LickStack{
 
 
 ## 队列 queue
+队列--是只允许在一端进行插入操作,而在另一端进行删除操作的线性表
 
+是一种先进先出的线性表(First In First Out)简称FIFO
 
-## 
+允许插入的一端称为队尾,允许删除的一端称为队头
+
+```c
+ADT 队列(Queue)
+Data
+    同线性表.元素具有相同的类型,相邻元素具有前驱和后继关系
+Operation
+    InitQueue(*Q):初始化操作,建立一个空队列Q
+    DestroyQueue(*Q):若队列Q存在,则销毁它
+    ClearQueue(*Q):将队列Q清空
+    QueueEmpty(Q):若队列Q为空,返回true,否则返回false
+    GetHead(Q,*e):若队列Q存在且非空,用e返回队列Q的队头元素
+    EnQueue(*Q,e):若队列Q存在,插入新元素e到队列Q中并成为队尾元素
+    DeQueue(*Q,*e):删除队列Q中队头元素,并用e返回其值
+    QueueLength(Q)返回队列Q的元素个数
+endADT
+```
+
+循环队列的顺序存储结构
+```c
+typedef int QElemType;
+typedef struct{
+    QElemType data[MAXSIZE];
+    int front;  //头指针
+    int rear;   //尾指针,若队列不空,指向队列尾元素的下一个位置
+}SqQueue;
+
+```
+
+队列的链式存储结构,其实就是线性表的单链表,只不过它只能尾进头出,简称为链队列
+
+## 串--
 
 
 
