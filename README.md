@@ -306,18 +306,20 @@ Status GetSqListElem(SqList L, int i, ElemType *e) {
  */
 Status SqListInsert(SqList *L, int i, ElemType e) {
     
-    // 顺序线性表已满
+    // 1. 顺序线性表已满
     if (L->length == MAXSIZE) return ERROR;
-    // i 不在线性表范围内
+    // 2. 插入位置i 不在线性表范围内
     if (i<1 || i>L->length+1) return ERROR;
     // 插入数据位置不在表尾部
-    if (i<=L->length) {
-        // 将要插入位置后的元素统一后移一位
+    if (i <= L->length) {
+        // 3.将要插入位置后的元素统一后移一位
         for (int k=L->length-1; k>=i-1; k--) {
             L->data[k+1] = L->data[k];
         }
     }
+    // 4.将要插入的元素 填入 第i个位置
     L->data[i-1] = e;
+    // 5. 表长+1
     L->length ++;
 
     return OK;
@@ -337,17 +339,18 @@ Status SqListInsert(SqList *L, int i, ElemType e) {
  */
 Status SqListDelete(SqList *L, int i, ElemType *e) {
     
-    // 空表
+    // 1. 空表
     if (L->length==0) return ERROR;
-    // 要删除的位置不正确
+    // 2. 要删除的位置不正确
     if (i<1 || i>L->length) return ERROR;
     *e = L->data[i-1];
-    // 若删除的不是表尾, 将删除位置后继元素前移
+    // 3. 若删除的不是表尾, 将删除位置 后继元素 前移
     if (i<L->length) {
         for (int k=i; k<L->length; k++) {
-            L->data[k-1] = L->data[k];
+            L->data[k-1] = L->data[k]; // 依次前移
         }
     }
+    // 4. 表长-1
     L->length --;
     
     return OK;
@@ -377,8 +380,8 @@ n 个节点（a<sub>i</sub>的存储映像）链接成一个链表，即为线�
  结点由存放数据元素的数据域和存放后继结点地址的指针域组成
  */
 typedef struct Node {
-    ElemType data;
-    struct Node *next;
+    ElemType data;     // 数据信息
+    struct Node *next; // 指向信息/单线联系
 } Node;
 
 // 定义 LinkList
@@ -400,8 +403,9 @@ Status GetLinkListElem(LinkList L, int i, ElemType *e) {
     LinkList p = L->next;
     int j = 1;
     
-    while (p && j<i) {
-        p = p->next;
+    while (p && j<i) 
+    {
+        p = p->next; // 后继
         ++j;
     }
     if (!p || j > i) {
@@ -696,6 +700,17 @@ int StaticLinkListLength(StaticLinkList space) {
 
 ### 静态链表的优缺点
 ![](https://github.com/Ewenwan/reading-notes/tree/master/da-hua-shu-ju-jie-gou/03-list/assets/static_link_list.png)
+
+
+## 栈 stack
+
+
+
+## 队列 queue
+
+
+## 
+
 
 
 # 4. 非线性表
